@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>RedBoy</title>
+        <meta name="description" content="ble test scanning">
+       
+		<script src="jquery-1.11.1.min.js"></script>
+    </head>
+    <body>
+
+        <h1>Blu</h1>
+		
+		<li>
+			<input type="button" id="getBlue" value="Scan Beacons" />
+			<button id="docs" onclick="location.href='http://docs.build.phonegap.com'">
+     Doc</button>
+			<button id="monitor">Scan</button>
+		</li>
+		
+		<li id="feedback">
+			
+		</li>
+		
+		
+		<script type="text/javascript">
+			//event handling using jquery
+			
+			$(document).ready (function () {
+					$('#getBlue').click(function () {
+							var value = 'Very Nice Day Sir';
+							$('#feedback').html(value);
+							console.log('hey jim');
+					});
+				//start monitoring beacons
+					$('#monitor').click(function () {
+						var logToDom = function (message) {
+						var e = document.createElement('label');
+						e.innerText = message;
+
+						var br = document.createElement('br');
+						var br2 = document.createElement('br');
+						document.body.appendChild(e);
+						document.body.appendChild(br);
+						document.body.appendChild(br2);
+					};
+
+					var delegate = new cordova.plugins.locationManager.Delegate().implement({
+
+						didDetermineStateForRegion: function (pluginResult) {
+
+							logToDom('[DOM] didDetermineStateForRegion: ' + JSON.stringify(pluginResult));
+
+							cordova.plugins.locationManager.appendToDeviceLog('[DOM] didDetermineStateForRegion: '
+								+ JSON.stringify(pluginResult));
+						},
+
+						didStartMonitoringForRegion: function (pluginResult) {
+							console.log('didStartMonitoringForRegion:', pluginResult);
+
+							logToDom('didStartMonitoringForRegion:' + JSON.stringify(pluginResult));
+						},
+
+						didRangeBeaconsInRegion: function (pluginResult) {
+							logToDom('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult));
+						}
+
+					});
+
+					var uuid = 'DA5336AE-2042-453A-A57F-F80DD34DFCD9';
+					var identifier = 'beaconOnTheMacBooksShelf';
+					var minor = 1000;
+					var major = 5;
+					var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid, major, minor);
+
+					cordova.plugins.locationManager.setDelegate(delegate);
+					cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
+						.fail(console.error)
+						.done();
+
+							
+					});
+			
+			
+			
+});
+		
+		</script>
+    </body>
+</html>
