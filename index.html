@@ -36,6 +36,22 @@
 					});
 				//start monitoring beacons
 					$('#monitor').click(function () {
+						
+						//create region
+						function createBeacon() {
+
+							var uuid = 'f7826da6-4fa2-4e98-8024-bc5b71e0893e'; // mandatory
+							var identifier = 'Umvb'; // mandatory
+							var minor = 39304; // optional, defaults to wildcard if left empty
+							var major = 61171; // optional, defaults to wildcard if left empty
+
+							// throws an error if the parameters are not valid
+							var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid, major, minor);
+
+							return beaconRegion;   
+						} 
+						
+						
 						var logToDom = function (message) {
 						var e = document.createElement('label');
 						e.innerText = message;
@@ -69,10 +85,10 @@
 
 					});
 
-					var uuid = 'DA5336AE-2042-453A-A57F-F80DD34DFCD9';
-					var identifier = 'beaconOnTheMacBooksShelf';
-					var minor = 1000;
-					var major = 5;
+					var uuid = 'f7826da6-4fa2-4e98-8024-bc5b71e0893e';
+					var identifier = 'Umvb';
+					var minor = 39304;
+					var major = 61171;
 					var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid, major, minor);
 
 					cordova.plugins.locationManager.setDelegate(delegate);
