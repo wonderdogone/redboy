@@ -16,7 +16,7 @@
     <author href="https://build.phonegap.com" email="support@phonegap.com">
       Jay 
     </author>
-	<preference name="stay-in-webview" value="false" />
+	<preference name="stay-in-webview" value="true" />
     <!--
       This allows your app to load assets from all *.phongap.com domains
     -->
