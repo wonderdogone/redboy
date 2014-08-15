@@ -27,9 +27,13 @@
 		</li>
 		
 		<script type="text/javascript">
+			$(document).ready (function () {
 				function onLoad() {
 					document.addEventListener("deviceready", onDeviceReady, false);
 				}
+				
+			onLoad();
+				
 			function onDeviceReady() {
 			//start monitoring beacons
 						
@@ -91,7 +95,23 @@
 					cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
 						.fail(console.error)
 						.done();
+				
+				cordova.plugins.locationManager.isAdvertisingAvailable()
+					.then(function(isSupported){
+						console.log("isSupported: " + isSupported);
+					})
+					.fail(console.error)
+					.done();
+				
+				cordova.plugins.locationManager.isAdvertising()
+					.then(function(isAdvertising){
+						console.log("isAdvertising: " + isAdvertising);
+					})
+					.fail(console.error)
+					.done();
+
 			}
+});
 
 		
 		</script>
