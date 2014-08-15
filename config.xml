@@ -23,5 +23,4 @@
     <access origin="http://phonegap.com" subdomains="true" browserOnly="false" />
 		
 	<gap:plugin name="com.conetix.ibeacon" version="1.0.0" />
-	<gap:plugin name="org.apache.cordova.console" version="0.2.7" />
 </widget>
