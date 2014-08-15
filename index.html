@@ -30,14 +30,18 @@
 			//event handling using jquery
 			
 			$(document).ready (function () {
-				document.addEventListener('deviceready', function() {
-					$('#getBlue').click(function () {
+				$('#getBlue').click(function () {
 							var value = 'Very Nice Day Sir';
 							$('#feedback').html(value);
 							console.log('hey jim');
 					});
+				
+				$('#monitor').click(function () {
+					console.log('Hi Fellows');
+						});
+				
+				document.addEventListener('deviceready', function() {	
 				//start monitoring beacons
-					$('#monitor').click(function () {
 						
 						//create region
 						function createBeacon() {
@@ -99,7 +103,6 @@
 						.done();
 
 							
-					});
 			
 			}, false);
 			
