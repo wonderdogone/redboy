@@ -8,7 +8,7 @@
         <meta name="description" content="ble test scanning">
        
 		<script src="jquery-1.11.1.min.js"></script>
-		<script type = "text/javascript" src="phonegap.js"></script>
+		<script src="phonegap.js"></script>
     </head>
     <body onload="onLoad()">
 
@@ -16,8 +16,6 @@
 		
 		<li>
 			<input type="button" id="getBlue" value="Scan Beacons" />
-			<button id="docs">
-     Doc</button>
 			<a href="http://docs.build.phonegap.com/en_US/support_getting_help.md.html/">
 			<button id="docs">Doc</button>
 			</a>
@@ -32,7 +30,7 @@
 				function onLoad() {
 					document.addEventListener("deviceready", onDeviceReady, false);
 				}
-			function onDeviceReady() {	
+			function onDeviceReady() {
 			//start monitoring beacons
 						
 						//create region
