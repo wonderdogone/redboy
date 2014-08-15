@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html>
-
+ 
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -10,15 +10,14 @@
 		<script src="jquery-1.11.1.min.js"></script>
 		<script src="phonegap.js"></script>
     </head>
-    <body onload="onLoad()">
-
+    <body>
+ 
         <h1>Blu</h1>
 		
 		<li>
 			<input type="button" id="getBlue" value="Scan Beacons" />
-			<a href="http://docs.build.phonegap.com/en_US/support_getting_help.md.html/">
-			<button id="docs">Doc</button>
-			</a>
+			<button id="docs" onclick="location.href='http://docs.build.phonegap.com'">
+     Doc</button>
 			<button id="monitor">Scan</button>
 		</li>
 		
@@ -26,28 +25,30 @@
 			
 		</li>
 		
+		
 		<script type="text/javascript">
+			//event handling using jquery
+			
 			$(document).ready (function () {
-				function onLoad() {
-					document.addEventListener("deviceready", onDeviceReady, false);
-				}
-				
-			onLoad();
-				
-			function onDeviceReady() {
-			//start monitoring beacons
+					$('#getBlue').click(function () {
+							var value = 'Very Nice Day Sir';
+							$('#feedback').html(value);
+							console.log('hey jim');
+					});
+				//start monitoring beacons
+					$('#monitor').click(function () {
 						
 						//create region
 						function createBeacon() {
-
+ 
 							var uuid = 'f7826da6-4fa2-4e98-8024-bc5b71e0893e'; // mandatory
 							var identifier = 'Umvb'; // mandatory
 							var minor = 39304; // optional, defaults to wildcard if left empty
 							var major = 61171; // optional, defaults to wildcard if left empty
-
+ 
 							// throws an error if the parameters are not valid
 							var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid, major, minor);
-
+ 
 							return beaconRegion;   
 						} 
 						
@@ -55,64 +56,53 @@
 						var logToDom = function (message) {
 						var e = document.createElement('label');
 						e.innerText = message;
-
+ 
 						var br = document.createElement('br');
 						var br2 = document.createElement('br');
 						document.body.appendChild(e);
 						document.body.appendChild(br);
 						document.body.appendChild(br2);
 					};
-
+ 
 					var delegate = new cordova.plugins.locationManager.Delegate().implement({
-
+ 
 						didDetermineStateForRegion: function (pluginResult) {
-
+ 
 							logToDom('[DOM] didDetermineStateForRegion: ' + JSON.stringify(pluginResult));
-
+ 
 							cordova.plugins.locationManager.appendToDeviceLog('[DOM] didDetermineStateForRegion: '
 								+ JSON.stringify(pluginResult));
 						},
-
+ 
 						didStartMonitoringForRegion: function (pluginResult) {
 							console.log('didStartMonitoringForRegion:', pluginResult);
-
+ 
 							logToDom('didStartMonitoringForRegion:' + JSON.stringify(pluginResult));
 						},
-
+ 
 						didRangeBeaconsInRegion: function (pluginResult) {
 							logToDom('[DOM] didRangeBeaconsInRegion: ' + JSON.stringify(pluginResult));
 						}
-
+ 
 					});
-
+ 
 					var uuid = 'f7826da6-4fa2-4e98-8024-bc5b71e0893e';
 					var identifier = 'Umvb';
 					var minor = 39304;
 					var major = 61171;
 					var beaconRegion = new cordova.plugins.locationManager.BeaconRegion(identifier, uuid, major, minor);
-
+ 
 					cordova.plugins.locationManager.setDelegate(delegate);
 					cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
 						.fail(console.error)
 						.done();
-				
-				cordova.plugins.locationManager.isAdvertisingAvailable()
-					.then(function(isSupported){
-						console.log("isSupported: " + isSupported);
-					})
-					.fail(console.error)
-					.done();
-				
-				cordova.plugins.locationManager.isAdvertising()
-					.then(function(isAdvertising){
-						console.log("isAdvertising: " + isAdvertising);
-					})
-					.fail(console.error)
-					.done();
-
-			}
+ 
+							
+					});
+			
+			
+			
 });
-
 		
 		</script>
     </body>
