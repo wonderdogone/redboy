@@ -10,7 +10,7 @@
 		<script src="jquery-1.11.1.min.js"></script>
 		<script type = "text/javascript" src="cordova-2.2.0.js"></script>
     </head>
-    <body>
+    <body onload="onLoad()">
 
         <h1>Blu</h1>
 		
@@ -25,23 +25,12 @@
 			
 		</li>
 		
-		
 		<script type="text/javascript">
-			//event handling using jquery
-			
-			$(document).ready (function () {
-				$('#getBlue').click(function () {
-							var value = 'Very Nice Day Sir';
-							$('#feedback').html(value);
-							console.log('hey jim');
-					});
-				
-				$('#monitor').click(function () {
-					console.log('Hi Fellows');
-						});
-				
-				document.addEventListener('deviceready', function() {	
-				//start monitoring beacons
+				function onLoad() {
+					document.addEventListener("deviceready", onDeviceReady, false);
+				}
+			function onDeviceReady() {	
+			//start monitoring beacons
 						
 						//create region
 						function createBeacon() {
@@ -101,12 +90,8 @@
 					cordova.plugins.locationManager.startMonitoringForRegion(beaconRegion)
 						.fail(console.error)
 						.done();
+			}
 
-							
-			
-			}, false);
-			
-});
 		
 		</script>
     </body>
